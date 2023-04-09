@@ -1,0 +1,77 @@
+package tests.loginPage.positive;
+
+import commonActions.Listener;
+import io.qameta.allure.Link;
+import io.qameta.allure.Story;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.api.parallel.Execution;
+import org.junit.jupiter.api.parallel.ExecutionMode;
+import tests.base.BaseTest;
+
+import static com.codeborne.selenide.Condition.visible;
+import static constants.Constants.DOMAINS_URL.ABTASTY_LOGIN_PAGE;
+import static constants.Constants.TestDataForSigningIn.*;
+import static constants.Docs.TEST_CASES_URL;
+
+@Link(name = "test cases", url = TEST_CASES_URL)
+@Story("A positive scenario")
+@ExtendWith(Listener.class)
+@Execution(ExecutionMode.CONCURRENT)
+
+public class LoginPagePositiveTests extends BaseTest {
+
+    /* Delete @Disabled annotation after getting valid credentials (EMAIL/PASSWORD)
+       and writing text from the title of home page to "TITLE_TEXT" in Constants */
+    @Disabled
+    @Test
+    @DisplayName("Authorization, client with valid credentials")
+    void checkLogInWithValidData() {
+        basePage.goToURL(ABTASTY_LOGIN_PAGE);
+        loginPage
+                .enterEmail(EMAIL)
+                .enterPassword(PASSWORD)
+                .clickSignInButton()
+                .checkInfo(TITLE_TEXT, visible);
+    }
+
+
+    @Test
+    @DisplayName("Authorization, client with valid credentials")
+    void checkLogInWithValidData2() {
+        basePage.goToURL(ABTASTY_LOGIN_PAGE);
+        loginPage
+                .enterPassword(PASSWORD)
+                .clickEyeButton()
+                .checkDisplayPassword();
+    }
+
+
+    /* Delete @Disabled annotation after getting valid EMAIL_SSO in Constants
+       and writing Xpath to "invitationToUseSSOLogin" locator in LoginPage */
+    @Disabled
+    @Test
+    @DisplayName("Authorization, client with valid SSO credentials")
+    void checkInvitationFor_SSO_User() {
+        basePage.goToURL(ABTASTY_LOGIN_PAGE);
+        loginPage
+                .enterEmail(EMAIL_SSO)
+                .checkSSOLinkInvitation();
+    }
+
+
+    @Test
+    @DisplayName("Authorization, client with valid credentials")
+    void checkIn() {
+        basePage.goToURL(ABTASTY_LOGIN_PAGE);
+        loginPage
+                .signInWithGoogleAccount()
+                .checkInfo("AB Tasty - Experience Optimization Platform", visible);
+    }
+
+
+
+
+}
