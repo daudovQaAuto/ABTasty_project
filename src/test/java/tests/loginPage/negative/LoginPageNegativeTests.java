@@ -1,5 +1,6 @@
 package tests.loginPage.negative;
 
+import commonActions.CommonActions;
 import commonActions.Listener;
 import io.qameta.allure.Link;
 import io.qameta.allure.Story;
@@ -31,7 +32,7 @@ public class LoginPageNegativeTests extends BaseTest {
                            ,INVALID_EMAIL_MISSED_DOMAIN
                            ,INVALID_EMAIL_WITH_INVALID_CHARACTERS
                            ,INVALID_EMAIL_WITH_CYRILLIC_LETTERS})
-    @DisplayName("Authorization, client with different invalid variations of email ")
+    @DisplayName("ID 2: Verify that an error message is displayed with invalid emails")
     void checkLogInWithInvalidEmails(String email) {
         basePage.goToURL(ABTASTY_LOGIN_PAGE);
         loginPage
@@ -46,8 +47,7 @@ public class LoginPageNegativeTests extends BaseTest {
     @ValueSource(strings = {INVALID_PASSWORD_LESS_8_CHARACTERS
                            ,INVALID_PASSWORD_MORE_64_CHARACTERS
                            ,INVALID_PASSWORD_NO_SYMBOLS})
-    @Test
-    @DisplayName("Authorization, client with different invalid variations of passwords")
+    @DisplayName("ID 3: Verify that an error message is displayed with invalid password")
     void checkSignInWithInvalidPassword(String password) {
         basePage.goToURL(ABTASTY_LOGIN_PAGE);
         loginPage
@@ -55,9 +55,6 @@ public class LoginPageNegativeTests extends BaseTest {
                 .enterPassword(password)
                 .clickSignInButton();
             loginPage.checkInfo(ERROR_MESSAGE, visible);
-            //clearBrowserCookies();
-
+            CommonActions.clearBrowserCookiesAndStorage();
     }
-
-
 }

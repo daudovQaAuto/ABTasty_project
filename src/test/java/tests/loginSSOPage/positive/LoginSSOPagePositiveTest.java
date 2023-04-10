@@ -13,10 +13,8 @@ import tests.base.BaseTest;
 
 import static com.codeborne.selenide.Condition.visible;
 import static constants.Constants.DOMAINS_URL.ABTASTY_LOGIN_PAGE;
-import static constants.Constants.TestDataForSigningIn.EMAIL_SSO;
-import static constants.Constants.TestDataForSigningIn.TITLE_TEXT;
+import static constants.Constants.TestDataForSigningIn.*;
 import static constants.Docs.TEST_CASES_URL;
-
 
 @Link(name = "test cases", url = TEST_CASES_URL)
 @Story("A positive scenario")
@@ -29,7 +27,7 @@ public class LoginSSOPagePositiveTest extends BaseTest {
        and writing text from the title of home page to "TITLE_TEXT" in Constants */
     @Disabled
     @Test
-    @DisplayName("Authorization, client with valid SSO credentials")
+    @DisplayName("ID 5: Sign in with valid email as SSO user")
     void checkSignInWithSSO() {
         basePage
                 .goToURL(ABTASTY_LOGIN_PAGE);
@@ -39,7 +37,17 @@ public class LoginSSOPagePositiveTest extends BaseTest {
                 .enterSSOEmail(EMAIL_SSO)
                 .clickSignInButton()
                 .checkInfo(TITLE_TEXT, visible);
-
     }
 
+    @Test
+    @DisplayName("ID 17: Check arrow back button on SSO page")
+    void checkArrowButtonOfSSO() {
+        basePage
+                .goToURL(ABTASTY_LOGIN_PAGE);
+        loginPage
+                .clickSignInWithSSO();
+        logInWithSSOPage
+                .clickArrowBackButtonSSO()
+                .checkInfo(LOGIN_PAGE_TITLE_TEXT, visible);
+    }
 }

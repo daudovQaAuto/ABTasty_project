@@ -9,10 +9,14 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.parallel.Execution;
 import org.junit.jupiter.api.parallel.ExecutionMode;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+import pages.mfaPage.MFAPage;
 import tests.base.BaseTest;
 
 import static com.codeborne.selenide.Condition.visible;
 import static constants.Constants.DOMAINS_URL.ABTASTY_LOGIN_PAGE;
+import static constants.Constants.DOMAINS_URL.SMS_CODE_API;
 import static constants.Constants.TestDataForSigningIn.*;
 import static constants.Docs.TEST_CASES_URL;
 
@@ -27,7 +31,7 @@ public class LoginPagePositiveTests extends BaseTest {
        and writing text from the title of home page to "TITLE_TEXT" in Constants */
     @Disabled
     @Test
-    @DisplayName("Authorization, client with valid credentials")
+    @DisplayName("ID 1: Verify that a user can successfully log in with valid email and password")
     void checkLogInWithValidData() {
         basePage.goToURL(ABTASTY_LOGIN_PAGE);
         loginPage
@@ -37,10 +41,21 @@ public class LoginPagePositiveTests extends BaseTest {
                 .checkInfo(TITLE_TEXT, visible);
     }
 
+    /* Delete @Disabled annotation after getting valid EMAIL_SSO in Constants
+       and writing Xpath to "invitationToUseSSOLogin" locator in LoginPage */
+    @Disabled
+    @Test
+    @DisplayName("ID 4: Check the display of invitation link to sign in as SSO user")
+    void checkInvitationFor_SSO_User() {
+        basePage.goToURL(ABTASTY_LOGIN_PAGE);
+        loginPage
+                .enterEmail(EMAIL_SSO)
+                .checkSSOLinkInvitation();
+    }
 
     @Test
-    @DisplayName("Authorization, client with valid credentials")
-    void checkLogInWithValidData2() {
+    @DisplayName("ID 6: Check the button eye/strikethrough is show/hide the password input")
+    void checkDisplayPasswordWhenClickEyeButton() {
         basePage.goToURL(ABTASTY_LOGIN_PAGE);
         loginPage
                 .enterPassword(PASSWORD)
@@ -48,17 +63,18 @@ public class LoginPagePositiveTests extends BaseTest {
                 .checkDisplayPassword();
     }
 
-
-    /* Delete @Disabled annotation after getting valid EMAIL_SSO in Constants
-       and writing Xpath to "invitationToUseSSOLogin" locator in LoginPage */
-    @Disabled
-    @Test
-    @DisplayName("Authorization, client with valid SSO credentials")
-    void checkInvitationFor_SSO_User() {
+    @ParameterizedTest
+    @ValueSource(strings = {INVALID_PASSWORD_NO_NUMBERS
+                           ,INVALID_PASSWORD_LESS_8_CHARACTERS
+                           ,INVALID_PASSWORD_NO_NUMBERS})
+    @DisplayName("ID 8: Check Captcha triggering after 3 attempts signing in with invalid passwords")
+    void checkCaptchaTriggering(String password) {
         basePage.goToURL(ABTASTY_LOGIN_PAGE);
         loginPage
-                .enterEmail(EMAIL_SSO)
-                .checkSSOLinkInvitation();
+                .enterEmail(EMAIL)
+                .enterPassword(password)
+                .clickSignInButton()
+                .clickCheckBoxRecaptcha();
     }
 
 
@@ -70,8 +86,6 @@ public class LoginPagePositiveTests extends BaseTest {
                 .signInWithGoogleAccount()
                 .checkInfo("AB Tasty - Experience Optimization Platform", visible);
     }
-
-
 
 
 }

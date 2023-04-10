@@ -6,6 +6,8 @@ import org.slf4j.LoggerFactory;
 import pages.base.BasePage;
 import pages.loginPage.LoginPage;
 import pages.loginSSOPage.LoginSSOPage;
+import pages.mfaPage.MFAPage;
+import pages.resetPasswordPage.ResetPasswordPage;
 
 import java.io.File;
 import java.time.LocalTime;
@@ -15,8 +17,10 @@ public class BaseTest {
 
 	protected BasePage basePage = new BasePage();
 	protected LoginPage loginPage = new LoginPage();
-
+	protected MFAPage mfaPage = new MFAPage();
 	protected LoginSSOPage logInWithSSOPage = new LoginSSOPage();
+	protected ResetPasswordPage resetPasswordPage = new ResetPasswordPage();
+
 	private static final Logger LOGGER = LoggerFactory.getLogger(BaseTest.class);
 
 	/**
