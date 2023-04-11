@@ -9,8 +9,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.parallel.Execution;
 import org.junit.jupiter.api.parallel.ExecutionMode;
 import tests.base.BaseTest;
-
-
 import static com.codeborne.selenide.Condition.visible;
 import static constants.Constants.DOMAINS_URL.ABTASTY_LOGIN_PAGE;
 import static constants.Constants.TestDataForSigningIn.*;
@@ -37,7 +35,7 @@ public class ResetPasswordPagePositiveTests extends BaseTest {
     }
 
     @Test
-    @DisplayName("ID 16: Check arrow back button on Reset password page")
+    @DisplayName("ID 16: Check the arrow back button on the Reset password page")
     void checkArrowButtonOfRPP() {
         basePage
                 .goToURL(ABTASTY_LOGIN_PAGE);

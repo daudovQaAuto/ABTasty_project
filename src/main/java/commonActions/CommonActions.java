@@ -3,7 +3,6 @@ package commonActions;
 import com.codeborne.selenide.Selenide;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import static commonActions.Config.CLEAR_COOKIES;
 
 public class CommonActions {

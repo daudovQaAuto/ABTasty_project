@@ -49,12 +49,6 @@
         </dependency>
 
         <!--Selenide Dependency-->
-        <dependency>
-            <groupId>com.codeborne</groupId>
-            <artifactId>selenide</artifactId>
-            <version>6.12.4</version>
-            <scope>test</scope>
-        </dependency>
 
         <dependency>
             <groupId>com.codeborne</groupId>

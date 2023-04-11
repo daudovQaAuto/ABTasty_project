@@ -2,7 +2,6 @@ package pages.loginPage;
 
 import com.codeborne.selenide.*;
 import pages.base.BasePage;
-
 import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
@@ -20,7 +19,6 @@ public class LoginPage extends BasePage {
 
     /**
      * Enter an email
-     *
      * @param email is for email
      */
     public LoginPage enterEmail(String email) {
@@ -30,7 +28,6 @@ public class LoginPage extends BasePage {
 
     /**
      * Enter a password
-     *
      * @param password is for password
      */
     public LoginPage enterPassword(String password) {
@@ -47,25 +44,33 @@ public class LoginPage extends BasePage {
     }
 
     /**
-     * Click Sign in button
+     * Click Eye/strikethrough button
      */
     public LoginPage clickEyeButton() {
         buttonEye.shouldBe(visible).click();
         return this;
     }
 
+    /**
+     * Click "Forgot your password?" link
+     */
     public LoginPage clickForgotYourPasswordLink() {
         linkForgotYourPassword.shouldBe(visible).click();
         return this;
     }
 
-
+    /**
+     * Check if password is visible
+     */
     public LoginPage checkDisplayPassword() {
         inputPassword.shouldHave(attribute("type", "text"));
         return this;
     }
 
-
+    /**
+     * Verify that the sign-in button can be(visible,enabled etc.)
+     * @param condition for expected condition
+     */
     public LoginPage checkSignInButton(Condition condition) {
         buttonSignIn.shouldBe(condition);
         return this;
@@ -80,7 +85,7 @@ public class LoginPage extends BasePage {
     }
 
     /**
-     * Checking the display of invitation to use the SSO link below
+     * Checking the display of invitation to use the SSO link
      */
     public LoginPage checkSSOLinkInvitation() {
         invitationToUseSSOLogin.shouldBe(visible);
@@ -88,7 +93,7 @@ public class LoginPage extends BasePage {
     }
 
     /**
-     * Click Sign in with SSO
+     * Click Sign in with SSO account
      */
     public LoginPage clickSignInWithSSO() {
         buttonSSOSignIn.shouldBe(visible).click();

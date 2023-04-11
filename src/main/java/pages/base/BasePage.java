@@ -17,21 +17,19 @@ public class BasePage {
 
     /**
      * Clean the element of the text and enters the desired text
-     *
-     * @param element Selenium WebElement
+     * @param element Selenide Element
      * @param value text
      */
     protected void clearAndType(SelenideElement element, String value) {
-        while (!element.getAttribute("value").equals("")) element.sendKeys(Keys.BACK_SPACE);
-        element.setValue(value);
+        while (!element.getAttribute("value").equals(""))
+            element.sendKeys(Keys.BACK_SPACE);
+            element.setValue(value);
     }
 
-
     /**
-     * @param message (write here the header from home page after registration)
+     * @param message (for example you can write here the title from the home page after registration)
      */
     public void checkInfo(String message, Condition condition) {
         $(byText(message)).shouldBe(condition);
     }
-
 }

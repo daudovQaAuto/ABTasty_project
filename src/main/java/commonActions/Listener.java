@@ -7,7 +7,6 @@ import org.junit.jupiter.api.extension.*;
 import org.openqa.selenium.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import static commonActions.CommonActions.clearBrowserCookiesAndStorage;
 import static org.junit.jupiter.api.extension.ExtensionContext.Namespace.GLOBAL;
 

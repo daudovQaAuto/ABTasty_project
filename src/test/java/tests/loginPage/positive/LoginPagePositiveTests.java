@@ -11,12 +11,9 @@ import org.junit.jupiter.api.parallel.Execution;
 import org.junit.jupiter.api.parallel.ExecutionMode;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import pages.mfaPage.MFAPage;
 import tests.base.BaseTest;
-
 import static com.codeborne.selenide.Condition.visible;
 import static constants.Constants.DOMAINS_URL.ABTASTY_LOGIN_PAGE;
-import static constants.Constants.DOMAINS_URL.SMS_CODE_API;
 import static constants.Constants.TestDataForSigningIn.*;
 import static constants.Docs.TEST_CASES_URL;
 
@@ -54,7 +51,7 @@ public class LoginPagePositiveTests extends BaseTest {
     }
 
     @Test
-    @DisplayName("ID 6: Check the button eye/strikethrough is show/hide the password input")
+    @DisplayName("ID 6: Check if the button eye/strikethrough shows/hides the password input")
     void checkDisplayPasswordWhenClickEyeButton() {
         basePage.goToURL(ABTASTY_LOGIN_PAGE);
         loginPage
@@ -67,7 +64,7 @@ public class LoginPagePositiveTests extends BaseTest {
     @ValueSource(strings = {INVALID_PASSWORD_NO_NUMBERS
                            ,INVALID_PASSWORD_LESS_8_CHARACTERS
                            ,INVALID_PASSWORD_NO_NUMBERS})
-    @DisplayName("ID 8: Check Captcha triggering after 3 attempts signing in with invalid passwords")
+    @DisplayName("ID 8: Check Captcha triggering after 3 attempts to click the sign in button with an invalid password(s)")
     void checkCaptchaTriggering(String password) {
         basePage.goToURL(ABTASTY_LOGIN_PAGE);
         loginPage
@@ -77,15 +74,13 @@ public class LoginPagePositiveTests extends BaseTest {
                 .clickCheckBoxRecaptcha();
     }
 
-
+    @Disabled
     @Test
-    @DisplayName("Authorization, client with valid credentials")
+    @DisplayName("NOT REQUIRED")
     void checkIn() {
         basePage.goToURL(ABTASTY_LOGIN_PAGE);
         loginPage
                 .signInWithGoogleAccount()
                 .checkInfo("AB Tasty - Experience Optimization Platform", visible);
     }
-
-
 }

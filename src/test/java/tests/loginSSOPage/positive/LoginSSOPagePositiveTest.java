@@ -10,7 +10,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.parallel.Execution;
 import org.junit.jupiter.api.parallel.ExecutionMode;
 import tests.base.BaseTest;
-
 import static com.codeborne.selenide.Condition.visible;
 import static constants.Constants.DOMAINS_URL.ABTASTY_LOGIN_PAGE;
 import static constants.Constants.TestDataForSigningIn.*;
@@ -27,7 +26,7 @@ public class LoginSSOPagePositiveTest extends BaseTest {
        and writing text from the title of home page to "TITLE_TEXT" in Constants */
     @Disabled
     @Test
-    @DisplayName("ID 5: Sign in with valid email as SSO user")
+    @DisplayName("ID 5: Verify that a use can sign in with a valid email as the SSO user")
     void checkSignInWithSSO() {
         basePage
                 .goToURL(ABTASTY_LOGIN_PAGE);
@@ -40,8 +39,8 @@ public class LoginSSOPagePositiveTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("ID 17: Check arrow back button on SSO page")
-    void checkArrowButtonOfSSO() {
+    @DisplayName("ID 17: Check the arrow back button on the SSO page")
+    void checkArrowButtonOfSSO(){
         basePage
                 .goToURL(ABTASTY_LOGIN_PAGE);
         loginPage

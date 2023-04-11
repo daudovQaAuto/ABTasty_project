@@ -4,12 +4,9 @@ import com.codeborne.selenide.SelenideElement;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import pages.base.BasePage;
-
 import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
-import static constants.Constants.TestDataForSigningIn.*;
-
 
 public class MFAPage extends BasePage {
 
@@ -21,28 +18,30 @@ public class MFAPage extends BasePage {
 
 
     /**
-     * Getting MFA code from SMS and clicking OK button
+     * Getting MFA code from SMS
+     * @param urlSms for API endpoint where we can get sent message
+     * @param userEmail for comparison user number
      */
     public MFAPage setConfirmationCodeSms(String urlSms, String userEmail) {
         JsonPath jsonPath = RestAssured
                 .when()
-                .get(urlSms + userEmail)
+                    .get(urlSms + userEmail)
                 .then()
-                .extract().jsonPath();
+                    .extract().jsonPath();
         inputSMSField.sendKeys(jsonPath.get("[0].otp").toString());
         return this;
     }
 
     /**
-     * Getting MFA code from SMS and clicking OK button
+     * Input invalid code from SMS
      */
-    public MFAPage setConfirmationInvalidCodeSms() {
-        clearAndType(inputSMSField, INVALID_SMS_CODE);
+    public MFAPage setConfirmationInvalidCodeSms(String invalidSms) {
+        clearAndType(inputSMSField, invalidSms);
         return this;
     }
 
     /**
-     * Getting MFA code from SMS and clicking OK button
+     * CLick OK button on MFA page
      */
     public MFAPage clickOkButton() {
         button_OK_For_SMS_Code.shouldBe(visible).click();
@@ -50,7 +49,7 @@ public class MFAPage extends BasePage {
     }
 
     /**
-     * Getting MFA code from SMS and clicking OK button
+     * Check if checkbox has a check mark
      */
     public MFAPage clickOkButtonIfCheckBoxSelected() {
         if (checkBoxForTick.isSelected()) {
@@ -59,9 +58,8 @@ public class MFAPage extends BasePage {
         return this;
     }
 
-
     /**
-     * Getting MFA code from SMS and clicking OK button
+     * Click on checkbox
      */
     public MFAPage clickCheckBoxForTick() {
         checkBoxForTick.shouldBe(enabled).click();
@@ -69,7 +67,7 @@ public class MFAPage extends BasePage {
     }
 
     /**
-     * Getting MFA code from SMS and clicking OK button
+     * Click an arrow back button
      */
     public MFAPage clickArrowBackButton() {
         buttonArrowBack.shouldBe(enabled).click();
@@ -77,7 +75,7 @@ public class MFAPage extends BasePage {
     }
 
     /**
-     * Getting MFA code from SMS and clicking OK button
+     * Click on reset code button
      */
     public MFAPage clickRenvoyerLeCode() {
         buttonRenvoyerLeCode.shouldBe(enabled).click();
