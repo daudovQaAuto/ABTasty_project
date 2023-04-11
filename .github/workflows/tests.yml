@@ -13,7 +13,7 @@ env:
 
 jobs:
   test:
-    runs-on: windows-11
+    runs-on: windows-10
 
     strategy:
       matrix:
