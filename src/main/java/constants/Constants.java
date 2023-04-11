@@ -35,7 +35,7 @@ public class Constants {
 		public static final String INVALID_PASSWORD_NO_SYMBOLS = "testPassword123";
 		public static final String INVALID_PASSWORD_NO_UPPERCASE_CHARACTERS = "testpassword123.";
 
-		// Error messages
+		// Error messages here
 		public static final String ERROR_MESSAGE = "Please enter a valid email or password";
 		public static final String ERROR_MESSAGE_INVALID_SMS = "Oups ! Le code que vous avez saisi est incorrect. Veuillez re'essayer";
 
