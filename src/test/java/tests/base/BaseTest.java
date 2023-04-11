@@ -13,7 +13,7 @@ import java.time.LocalTime;
 import java.util.Objects;
 
 public class BaseTest {
-    //Here's some comment
+
     protected BasePage basePage = new BasePage();
     protected LoginPage loginPage = new LoginPage();
     protected MFAPage mfaPage = new MFAPage();
