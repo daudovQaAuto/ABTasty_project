@@ -1,0 +1,47 @@
+name: Build and Test ABTasty_project
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  ABTASTY_LOGIN_URL: https://app2.abtasty.com/login
+  ABTASTY_VALID_EMAIL: testuser@example.com
+  ABTASTY_VALID_PASSWORD: testpassword123
+
+jobs:
+  test:
+    runs-on: windows-11
+
+    strategy:
+      matrix:
+        selenide-version: [6.12.4]
+        java-version: [11]
+
+    steps:
+    - name: Checkout repository (clone project from git)
+      uses: actions/checkout@v2
+
+    - name: Set up JDK ${{ matrix.java-version }}
+      uses: actions/setup-java@v1
+      with:
+        java-version: ${{ matrix.java-version }}
+
+    - name: Cache Maven packages
+      uses: actions/cache@v2
+      with:
+        path: ~/.m2/repository
+        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+        restore-keys: ${{ runner.os }}-maven-
+
+    - name: Build and run tests with Maven
+      env:
+        ABTASTY_LOGIN_URL: ${{ env.ABTASTY_LOGIN_URL }}
+        ABTASTY_VALID_EMAIL: ${{ env.ABTASTY_VALID_EMAIL }}
+        ABTASTY_VALID_PASSWORD: ${{ env.ABTASTY_VALID_PASSWORD }}
+
+      run: mvn -B test 	-Dselenide.browser=chrome 
+			     	-Dselenide.browser.version=${{ matrix.selenide-version }} 
+			      -Dtest=LoginPageNegativeTests,LoginPagePositiveTests,MFAPagePositiveTests
